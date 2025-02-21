@@ -1,22 +1,7 @@
 const express = require('express');
-const mysql = require('mysql');
+const db = require('./db');
 const app = express();
 const port = 3000;
-
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'BC61yBRT5oju7ua4id7f',
-  database: 'smart_diet_manager'
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    return;
-  }
-  console.log('Connected to the MySQL database.');
-});
 
 app.use(express.json());
 
@@ -25,6 +10,10 @@ const healthRoutes = require('./routes/healthRoutes');
 
 app.use('/food', foodRoutes);
 app.use('/health', healthRoutes);
+
+app.get('/test', (req, res) => {
+  res.send('Server is running correctly.');
+});
 
 app.use((err, req, res, next) => {
   console.error('Unhandled Error:', err);

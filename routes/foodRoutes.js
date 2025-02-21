@@ -1,60 +1,87 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../server');  // 引入數據庫連接
+const db = require('../db');
 
-// 查詢所有食物項目
+// 獲取所有食物記錄
 router.get('/', (req, res) => {
-  const sql = 'SELECT * FROM foods';
+  const sql = 'SELECT * FROM foodrecords';
   db.query(sql, (err, results) => {
     if (err) {
-      console.error('Error retrieving food items:', err);
-      res.status(500).send('Error retrieving food items');
+      console.error('Error fetching food records:', err);
+      res.status(500).send('Something went wrong! Error: ' + err.message);
       return;
     }
     res.json(results);
   });
 });
 
-// 新增食物項目
+// 獲取單個食物記錄
+router.get('/:record_id', (req, res) => {
+  const { record_id } = req.params;
+  const sql = 'SELECT * FROM foodrecords WHERE record_id = ?';
+  db.query(sql, [record_id], (err, result) => {
+    if (err) {
+      console.error('Error fetching food record:', err);
+      res.status(500).send('Something went wrong! Error: ' + err.message);
+      return;
+    }
+    if (result.length === 0) {
+      res.status(404).send('Food record not found.');
+      return;
+    }
+    res.json(result[0]);
+  });
+});
+
+// 新增食物記錄
 router.post('/', (req, res) => {
-  const newFood = req.body;
-  const sql = 'INSERT INTO foods SET ?';
-  db.query(sql, newFood, (err, result) => {
+  const { user_id, food_name, calories, record_date } = req.body;
+  console.log('POST /food', req.body); // 添加日誌記錄
+  const sql = 'INSERT INTO foodrecords (user_id, food_name, calories, record_date) VALUES (?, ?, ?, ?)';
+  db.query(sql, [user_id, food_name, calories, record_date], (err, result) => {
     if (err) {
-      console.error('Error adding food item:', err);
-      res.status(500).send('Error adding food item');
+      console.error('Error adding food record:', err);
+      console.error('SQL:', sql);
+      console.error('Parameters:', [user_id, food_name, calories, record_date]);
+      res.status(500).send('Something went wrong! Error: ' + err.message);
       return;
     }
-    res.send(`Food item added successfully with ID ${result.insertId}`);
+    res.status(201).send('Food record added successfully.');
   });
 });
 
-// 更新食物項目
-router.put('/:id', (req, res) => {
-  const foodId = req.params.id;
-  const updatedFood = req.body;
-  const sql = 'UPDATE foods SET ? WHERE id = ?';
-  db.query(sql, [updatedFood, foodId], (err, result) => {
+// 更新食物記錄
+router.put('/:record_id', (req, res) => {
+  const { record_id } = req.params;
+  const { user_id, food_name, calories, record_date } = req.body;
+  console.log('PUT /food/' + record_id, req.body); // 添加日誌記錄
+  const sql = 'UPDATE foodrecords SET user_id = ?, food_name = ?, calories = ?, record_date = ? WHERE record_id = ?';
+  db.query(sql, [user_id, food_name, calories, record_date, record_id], (err, result) => {
     if (err) {
-      console.error('Error updating food item:', err);
-      res.status(500).send('Error updating food item');
+      console.error('Error updating food record:', err);
+      console.error('SQL:', sql);
+      console.error('Parameters:', [user_id, food_name, calories, record_date, record_id]);
+      res.status(500).send('Something went wrong! Error: ' + err.message);
       return;
     }
-    res.send(`Food item with ID ${foodId} updated successfully`);
+    res.send('Food record updated successfully.');
   });
 });
 
-// 刪除食物項目
-router.delete('/:id', (req, res) => {
-  const foodId = req.params.id;
-  const sql = 'DELETE FROM foods WHERE id = ?';
-  db.query(sql, [foodId], (err, result) => {
+// 刪除食物記錄
+router.delete('/:record_id', (req, res) => {
+  const { record_id } = req.params;
+  console.log('DELETE /food/' + record_id); // 添加日誌記錄
+  const sql = 'DELETE FROM foodrecords WHERE record_id = ?';
+  db.query(sql, [record_id], (err, result) => {
     if (err) {
-      console.error('Error deleting food item:', err);
-      res.status(500).send('Error deleting food item');
+      console.error('Error deleting food record:', err);
+      console.error('SQL:', sql);
+      console.error('Parameters:', [record_id]);
+      res.status(500).send('Something went wrong! Error: ' + err.message);
       return;
     }
-    res.send(`Food item with ID ${foodId} deleted successfully`);
+    res.send('Food record deleted successfully.');
   });
 });
 

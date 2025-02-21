@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Header = () => (
-  <header>
-    <h1>Food Records</h1>
-  </header>
-);
+const Header = () => {
+  return (
+    <header>
+      <h1>Smart Diet Manager</h1>
+    </header>
+  );
+};
 
 export default Header;
