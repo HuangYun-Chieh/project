@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- 統計分析頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -111,3 +112,118 @@
   </script>
 </body>
 </html>
+=======
+<!-- 統計分析頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧飲食管家｜統計分析</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>飲食統計分析</h1>
+    <div id="statistics-result">
+      <!-- 這裡JS會顯示統計數據或圖表 -->
+    </div>
+    <div id="weight-chart">
+      <h2>體重變化圖表</h2>
+      <canvas id="weightChartCanvas"></canvas>
+    </div>
+    <div id="weight-entry" style="margin-top:12px;">
+      <h3>新增體重紀錄</h3>
+      <input id="weightValue" type="number" step="0.1" placeholder="體重 (kg)" />
+      <input id="weightDate" type="date" />
+      <button id="saveWeight">儲存體重</button>
+    </div>
+    <div id="report-summary"></div>
+    <button id="export-csv">Export CSV</button>
+    <div id="monthly-review">
+      <h2>月回顧報告</h2>
+      <p id="monthlyReviewContent">這裡將顯示月回顧報告內容。</p>
+    </div>
+    <a href="home.html">← 回主頁</a>
+  </div>
+  <script src="script.js"></script>
+  <!-- 如果你沒有引入 Chart.js，可以用 CDN： -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    async function loadMonthlyReport() {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) {
+        document.getElementById('monthlyReviewContent').textContent = '請先登入以檢視報表。';
+        return;
+      }
+      const resp = await fetch('http://localhost:3000/api/reports/monthly', { headers: { 'Authorization': 'Bearer ' + token } });
+      const data = await resp.json();
+      if (!resp.ok) { document.getElementById('monthlyReviewContent').textContent = JSON.stringify(data); return; }
+      const d = data.data;
+      document.getElementById('monthlyReviewContent').innerHTML = `本月共 ${d.totalRecords} 筆紀錄，總熱量 ${d.totalCalories} kcal。常見食物：${(d.mostCommon||[]).map(x=>x.name+'('+x.count+')').join(', ')}`;
+
+      // daily chart
+      const labels = Object.keys(d.daily).sort();
+      const values = labels.map(k => d.daily[k]);
+      const ctx = document.getElementById('weightChartCanvas').getContext('2d');
+      if (window.Chart) {
+        new Chart(ctx, {
+          type: 'line',
+          data: { labels, datasets: [{ label: '每日總熱量 (kcal)', data: values, borderColor: 'rgb(75, 192, 192)', tension: 0.2 }] },
+          options: { responsive: true }
+        });
+      } else {
+        ctx.fillText('Chart.js 未載入，無法繪製圖表。',10,10);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+  loadMonthlyReport();
+  loadWeightSeries();
+        document.getElementById('export-csv').addEventListener('click', async () => {
+          const token = sessionStorage.getItem('authToken');
+          if (!token) { alert('請先登入以匯出報表。'); return; }
+          const url = 'http://localhost:3000/api/reports/monthly?format=csv';
+          const resp = await fetch(url, { headers: { 'Authorization': 'Bearer ' + token } });
+          if (!resp.ok) { alert('匯出失敗'); return; }
+          const blob = await resp.blob();
+          const a = document.createElement('a');
+          const urlObj = URL.createObjectURL(blob);
+          a.href = urlObj;
+          a.download = `monthly-report.csv`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(urlObj);
+        });
+      document.getElementById('saveWeight').addEventListener('click', async () => {
+        const token = sessionStorage.getItem('authToken');
+        if (!token) { alert('請先登入'); return; }
+        const value = parseFloat(document.getElementById('weightValue').value);
+        const date = document.getElementById('weightDate').value || new Date().toISOString().split('T')[0];
+        if (!value) { alert('請輸入數值'); return; }
+        const resp = await fetch('http://localhost:3000/api/metrics', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }, body: JSON.stringify({ type: 'weight', value, date }) });
+        if (!resp.ok) { alert('儲存失敗'); return; }
+        alert('體重已儲存');
+        loadWeightSeries();
+      });
+    });
+
+    async function loadWeightSeries() {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) return;
+      const resp = await fetch('http://localhost:3000/api/metrics?type=weight', { headers: { 'Authorization': 'Bearer ' + token } });
+      if (!resp.ok) return;
+      const data = await resp.json();
+      const rows = data.data || [];
+      const labels = rows.map(r => r.date.split('T')[0]);
+      const values = rows.map(r => Number(r.value));
+      const ctx = document.getElementById('weightChartCanvas').getContext('2d');
+      if (window.Chart) {
+        new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: '體重 (kg)', data: values, borderColor: 'rgb(255,99,132)', tension: 0.2 }] }, options: { responsive: true } });
+      }
+    }
+  </script>
+</body>
+</html>
+>>>>>>> 5d447e9 (10/28完成)

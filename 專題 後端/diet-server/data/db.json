@@ -1,0 +1,729 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "tester1",
+      "password": "$2a$10$placeholderhashedpassword",
+      "nickname": "測試",
+      "created_at": "2025-10-27T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "username": "itest_1761617443354",
+      "password": "$2a$10$6LeIC/HbphQnxBaDiAqUVuPMxv.ZV05H4r9j3hBoO7l15jFd1JaB.",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T02:10:43.701Z"
+    },
+    {
+      "id": 3,
+      "username": "itest_1761617488135",
+      "password": "$2a$10$qJ5t8r7iWGnlL9OGsY/sS.2D2/ct3CegKv1G1Jy2ZXoQ11U2Ie2vi",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T02:11:28.369Z"
+    },
+    {
+      "id": 4,
+      "username": "itest_1761626000869",
+      "password": "$2a$10$01l4v7f820DGRvo7OZeZWe33GRfqVocZv5QmLKZnZbzjdI07wFS.S",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:33:21.190Z"
+    },
+    {
+      "id": 5,
+      "username": "itest_1761626170713",
+      "password": "$2a$10$JDN9e.de7y4W0gNuW5zBHu04mdpGON9Fd8xNZNorKBFXl7fVE3i5y",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:12.012Z"
+    },
+    {
+      "id": 6,
+      "username": "itest_1761626176213",
+      "password": "$2a$10$gnD.kT37RD7qZRhgWrRu9.phCBUwDXRsF5.hsQHn9/mzB32s8ia/a",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:16.467Z"
+    },
+    {
+      "id": 7,
+      "username": "itest_1761626180670",
+      "password": "$2a$10$8KX40UlzW8gdMLiII4chgeVNXx2RU3SO.DQWO46oKpFxnRlnAEcqa",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:21.179Z"
+    },
+    {
+      "id": 8,
+      "username": "itest_1761626182256",
+      "password": "$2a$10$BgRt96xOZJZeaO0xpUHpU.5/TmcigJkc5JHEaNqvTgnpPtmR.INq6",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:23.263Z"
+    },
+    {
+      "id": 9,
+      "username": "itest_1761626187392",
+      "password": "$2a$10$3dhfF7I4Z7sPoQBnFq3lNOk3HW9Kts7gwVnIw1rfelhNz5HKkYqf.",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:27.945Z"
+    },
+    {
+      "id": 10,
+      "username": "itest_1761626192220",
+      "password": "$2a$10$e51VO4Faxo0y.7OTfVmAZOU/QC.1/MGBow5vNJoQxh1S9Ky3lFRcu",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:32.496Z"
+    },
+    {
+      "id": 11,
+      "username": "itest_1761626194183",
+      "password": "$2a$10$kUztTifhvWDPrXbtMsY0SumTSKySf41W/Ks47lBwSK7ITjCfyWtYO",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:34.987Z"
+    },
+    {
+      "id": 12,
+      "username": "itest_1761626199084",
+      "password": "$2a$10$OxkK8fMowUx6VCfsKsVRUO5l/O/R.qUsuXV6i0o4VHIe3NPqti5vG",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:39.403Z"
+    },
+    {
+      "id": 13,
+      "username": "itest_1761626203508",
+      "password": "$2a$10$hxPg/A9x0WYE7N.eyVz58ugqc8NeGDErF4wy2OG4yupl8kgCqOji2",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:44.084Z"
+    },
+    {
+      "id": 14,
+      "username": "itest_1761626205074",
+      "password": "$2a$10$tWK8idPvV4Teqx4teweZOucSYNdAOc0yhzB.e3GoHgXhbTZVSM0Zm",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:45.304Z"
+    },
+    {
+      "id": 15,
+      "username": "itest_1761626210608",
+      "password": "$2a$10$XE8Pwe3Yx0HOqnE4TxGc4uHghcAY7CnWJgDt5AfkNSB0aTNC1l272",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:51.041Z"
+    },
+    {
+      "id": 16,
+      "username": "itest_1761626212485",
+      "password": "$2a$10$9zabMMnz7SoiOV7Y1mRo6.9r8ueo2JS7w7PEGSMv5mj6p6wuIbPJa",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:52.687Z"
+    },
+    {
+      "id": 17,
+      "username": "itest_1761626213686",
+      "password": "$2a$10$EDUFGZygWYewMl8patLOUO980l4eNobPF8OMFBavx8zbzlLPCpPoW",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:36:55.540Z"
+    },
+    {
+      "id": 18,
+      "username": "itest_1761626219674",
+      "password": "$2a$10$6LQTGdQfXJE2QfMVHDKI1eE8RhAc9q9R8mSTXE3Zh5qX3BFEdo.kK",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:37:00.240Z"
+    },
+    {
+      "id": 19,
+      "username": "itest_1761626221269",
+      "password": "$2a$10$FhGA9.hl7nJleKOulOhLYulOzPNA.kvFxIMDtNZHv7/LBBEZhKaUO",
+      "nickname": "ITest",
+      "created_at": "2025-10-28T04:37:01.494Z"
+    }
+  ],
+  "foods": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T02:10:43.921Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T02:10:44.010Z"
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T02:10:44.098Z"
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T02:11:28.584Z"
+    },
+    {
+      "id": 5,
+      "user_id": 3,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T02:11:28.675Z"
+    },
+    {
+      "id": 6,
+      "user_id": 3,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T02:11:28.767Z"
+    },
+    {
+      "id": 7,
+      "user_id": 4,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:33:21.562Z"
+    },
+    {
+      "id": 8,
+      "user_id": 4,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:33:21.647Z"
+    },
+    {
+      "id": 9,
+      "user_id": 4,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:33:21.729Z"
+    },
+    {
+      "id": 10,
+      "user_id": 5,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:12.364Z"
+    },
+    {
+      "id": 11,
+      "user_id": 5,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:12.450Z"
+    },
+    {
+      "id": 12,
+      "user_id": 5,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:12.535Z"
+    },
+    {
+      "id": 13,
+      "user_id": 6,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:16.848Z"
+    },
+    {
+      "id": 14,
+      "user_id": 6,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:16.938Z"
+    },
+    {
+      "id": 15,
+      "user_id": 6,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:17.034Z"
+    },
+    {
+      "id": 16,
+      "user_id": 7,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:21.555Z"
+    },
+    {
+      "id": 17,
+      "user_id": 7,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:21.645Z"
+    },
+    {
+      "id": 18,
+      "user_id": 7,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:21.735Z"
+    },
+    {
+      "id": 19,
+      "user_id": 8,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:23.611Z"
+    },
+    {
+      "id": 20,
+      "user_id": 8,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:23.699Z"
+    },
+    {
+      "id": 21,
+      "user_id": 8,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:23.785Z"
+    },
+    {
+      "id": 22,
+      "user_id": 9,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:28.312Z"
+    },
+    {
+      "id": 23,
+      "user_id": 9,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:28.402Z"
+    },
+    {
+      "id": 24,
+      "user_id": 9,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:28.493Z"
+    },
+    {
+      "id": 25,
+      "user_id": 10,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:33.027Z"
+    },
+    {
+      "id": 26,
+      "user_id": 10,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:33.114Z"
+    },
+    {
+      "id": 27,
+      "user_id": 10,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:33.203Z"
+    },
+    {
+      "id": 28,
+      "user_id": 11,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:35.352Z"
+    },
+    {
+      "id": 29,
+      "user_id": 11,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:35.443Z"
+    },
+    {
+      "id": 30,
+      "user_id": 11,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:35.532Z"
+    },
+    {
+      "id": 31,
+      "user_id": 12,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:39.759Z"
+    },
+    {
+      "id": 32,
+      "user_id": 12,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:39.847Z"
+    },
+    {
+      "id": 33,
+      "user_id": 12,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:39.936Z"
+    },
+    {
+      "id": 34,
+      "user_id": 13,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:44.434Z"
+    },
+    {
+      "id": 35,
+      "user_id": 13,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:44.522Z"
+    },
+    {
+      "id": 36,
+      "user_id": 13,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:44.613Z"
+    },
+    {
+      "id": 37,
+      "user_id": 14,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:45.672Z"
+    },
+    {
+      "id": 38,
+      "user_id": 14,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:45.762Z"
+    },
+    {
+      "id": 39,
+      "user_id": 14,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:45.850Z"
+    },
+    {
+      "id": 40,
+      "user_id": 15,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:51.417Z"
+    },
+    {
+      "id": 41,
+      "user_id": 15,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:51.520Z"
+    },
+    {
+      "id": 42,
+      "user_id": 15,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:51.613Z"
+    },
+    {
+      "id": 43,
+      "user_id": 16,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:53.053Z"
+    },
+    {
+      "id": 44,
+      "user_id": 16,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:53.147Z"
+    },
+    {
+      "id": 45,
+      "user_id": 16,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:53.240Z"
+    },
+    {
+      "id": 46,
+      "user_id": 17,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:36:55.907Z"
+    },
+    {
+      "id": 47,
+      "user_id": 17,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:36:55.997Z"
+    },
+    {
+      "id": 48,
+      "user_id": 17,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:36:56.089Z"
+    },
+    {
+      "id": 49,
+      "user_id": 18,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:37:00.625Z"
+    },
+    {
+      "id": 50,
+      "user_id": 18,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:37:00.716Z"
+    },
+    {
+      "id": 51,
+      "user_id": 18,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:37:00.810Z"
+    },
+    {
+      "id": 52,
+      "user_id": 19,
+      "food_name": "早餐 2025-10-28 - 蛋饅頭",
+      "calories": 300,
+      "meal_type": "早餐",
+      "created_at": "2025-10-28T04:37:01.847Z"
+    },
+    {
+      "id": 53,
+      "user_id": 19,
+      "food_name": "午餐 2025-10-28 - 雞肉飯",
+      "calories": 700,
+      "meal_type": "午餐",
+      "created_at": "2025-10-28T04:37:01.937Z"
+    },
+    {
+      "id": 54,
+      "user_id": 19,
+      "food_name": "晚餐 2025-10-28 - 青菜豆腐",
+      "calories": 400,
+      "meal_type": "晚餐",
+      "created_at": "2025-10-28T04:37:02.026Z"
+    }
+  ],
+  "goals": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "updated_at": "2025-10-27T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "user_id": 4,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:33:21.423Z"
+    },
+    {
+      "id": 3,
+      "user_id": 5,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:12.221Z"
+    },
+    {
+      "id": 4,
+      "user_id": 6,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:16.695Z"
+    },
+    {
+      "id": 5,
+      "user_id": 7,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:21.410Z"
+    },
+    {
+      "id": 6,
+      "user_id": 8,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:23.463Z"
+    },
+    {
+      "id": 7,
+      "user_id": 9,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:28.161Z"
+    },
+    {
+      "id": 8,
+      "user_id": 10,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:32.727Z"
+    },
+    {
+      "id": 9,
+      "user_id": 11,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:35.204Z"
+    },
+    {
+      "id": 10,
+      "user_id": 12,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:39.615Z"
+    },
+    {
+      "id": 11,
+      "user_id": 13,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:44.295Z"
+    },
+    {
+      "id": 12,
+      "user_id": 14,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:45.520Z"
+    },
+    {
+      "id": 13,
+      "user_id": 15,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:51.264Z"
+    },
+    {
+      "id": 14,
+      "user_id": 16,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:52.896Z"
+    },
+    {
+      "id": 15,
+      "user_id": 17,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:36:55.765Z"
+    },
+    {
+      "id": 16,
+      "user_id": 18,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:37:00.478Z"
+    },
+    {
+      "id": 17,
+      "user_id": 19,
+      "goalType": "減脂",
+      "dailyCalories": 1500,
+      "targetWeight": 65,
+      "mealDistribution": "早餐:30,午餐:40,晚餐:30",
+      "updated_at": "2025-10-28T04:37:01.704Z"
+    }
+  ],
+  "meta": {
+    "nextUserId": 20,
+    "nextFoodId": 55,
+    "nextGoalId": 18
+  }
+}

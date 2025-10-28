@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- 新增飲食紀錄頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -112,3 +113,119 @@
   });
 </script>
 </html>
+=======
+<!-- 新增飲食紀錄頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧飲食管家｜新增紀錄</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 新增樣式調整下拉式選單大小與美化間距 */
+    #meal-type {
+      font-size: 1.2em;
+      padding: 0.5em;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    form input, form select, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background-color: #FF69B4; /* 粉紅色 */
+      color: white;
+      border: none;
+    }
+    form button:hover {
+      background-color: #FF1493; /* 深粉紅色 */
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007BFF;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #food-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    #food-list li {
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div class="container">
+    <h1>新增飲食紀錄</h1>
+    <form id="meal-form">
+      <label for="meal-type">餐別</label>
+      <select id="meal-type" required>
+        <option value="">請選擇餐別</option>
+        <option value="早餐">早餐</option>
+        <option value="午餐">午餐</option>
+        <option value="晚餐">晚餐</option>
+        <option value="點心">點心</option>
+      </select>
+      <label for="meal-content">餐點內容</label>
+      <input id="meal-content" type="text" placeholder="餐點內容" required>
+      <label for="meal-date">日期</label>
+      <input id="meal-date" type="date" required>
+      <button type="submit">送出</button>
+    </form>
+    <h2>今日飲食清單</h2>
+    <ul id="food-list">
+      <!-- 飲食紀錄會出現在這裡 -->
+    </ul>
+    <button id="logout-btn">登出</button>
+    <a href="home.html">← 回主頁</a>
+  </div>
+</body>
+<script>
+  const mealForm = document.getElementById('meal-form');
+  const foodList = document.getElementById('food-list');
+
+  mealForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const mealType = document.getElementById('meal-type').value;
+    const mealContent = document.getElementById('meal-content').value;
+    const mealDate = document.getElementById('meal-date').value;
+
+    const listItem = document.createElement('li');
+    listItem.textContent = `${mealDate} - ${mealType}: ${mealContent}`;
+    foodList.appendChild(listItem);
+
+    mealForm.reset();
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    alert('已登出');
+    // ...登出邏輯...
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.body.setAttribute("data-theme", savedTheme);
+  });
+</script>
+</html>
+>>>>>>> 5d447e9 (10/28完成)

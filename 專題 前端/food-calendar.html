@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- 食物日曆頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -39,3 +40,46 @@
     }
   });
 </script>
+=======
+<!-- 食物日曆頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧飲食管家｜食物日曆</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://unpkg.com/vue-simple-calendar@4"></script>
+  <link rel="stylesheet" href="https://unpkg.com/vue-simple-calendar@4/dist/vue-simple-calendar.min.css">
+</head>
+<body :data-theme="theme">
+  <div class="container" id="app">
+    <h1>食物日曆</h1>
+    <p>安排每天的餐點，讓您的飲食更有規劃。</p>
+    <vue-simple-calendar 
+      @day-click="handleDayClick"
+      :show-event-times="false"
+    ></vue-simple-calendar>
+    <a href="#" onclick="history.back()">← 返回上一頁</a>
+  </div>
+</body>
+<script src="food-calendar.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      theme: localStorage.getItem('theme') || 'light'
+    },
+    methods: {
+      toggleTheme() {
+        this.theme = this.theme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', this.theme);
+      }
+    },
+    mounted() {
+      document.body.setAttribute('data-theme', this.theme);
+    }
+  });
+</script>
+>>>>>>> 5d447e9 (10/28完成)

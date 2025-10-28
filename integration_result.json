@@ -1,6 +1,7 @@
 {
   "steps": [
     {
+<<<<<<< HEAD
       "step": "register",
       "status": 200,
       "body": "{\"success\":true,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksInVzZXJuYW1lIjoiaXRlc3RfMTc2MTYyNjIyMTI2OSIsImlhdCI6MTc2MTYyNjIyMSwiZXhwIjoxNzYyMjMxMDIxfQ.QD0-bPRO1QmhyZqvWOFSwkFpMaXQzItHTA9KNXeMMG0\"}"
@@ -117,4 +118,17 @@
       "upsertGoals"
     ]
   }
+=======
+      "step": "register_error",
+      "error": "fetch failed"
+    },
+    {
+      "step": "login_error",
+      "error": "fetch failed"
+    },
+    {
+      "note": "no token obtained, aborting remaining steps"
+    }
+  ]
+>>>>>>> 5d447e9 (10/28完成)
 }
