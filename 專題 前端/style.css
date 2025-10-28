@@ -1,0 +1,480 @@
+/* 全域設定 */
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+/* Header 樣式 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+}
+
+/* 切換模式按鈕 */
+#toggle-mode {
+  background-color: white;
+  color: #4CAF50;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#toggle-mode:hover {
+  background-color: #f0f0f0;
+}
+
+/* 主要內容容器 */
+.container {
+  background-color: white;
+  padding: 30px;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 選單樣式 */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.menu a, .logout {
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  display: block;
+}
+
+.menu a:hover, .logout:hover {
+  background-color: #45a049;
+}
+
+/* 淺色模式 */
+body[data-theme="light"] {
+  background-color: #ffffff;
+  color: #333;
+}
+
+body[data-theme="light"] .container {
+  background-color: #ffffff;
+  border: 1px solid #ffb6c1;
+}
+
+body[data-theme="light"] button {
+  background-color: #ff77b2;
+  color: white;
+}
+
+body[data-theme="light"] .menu a {
+  background-color: #ff77b2;
+  color: white;
+}
+
+body[data-theme="light"] header {
+  background-color: #ffb6c1;
+  color: white;
+}
+
+body[data-theme="light"] #toggle-mode {
+  background-color: #ff77b2;
+  color: white;
+  border: 1px solid #ffb6c1;
+}
+
+body[data-theme="light"] button:hover {
+  background-color: #e78ec0;
+}
+
+body[data-theme="light"] .menu a:hover {
+  background-color: #e78ec0;
+}
+
+/* 深色模式 */
+body[data-theme="dark"] {
+  background-color: #111111;
+  color: #f8f9fa;
+}
+
+body[data-theme="dark"] header {
+  background-color: #6bdbdf;
+  color: white;
+}
+
+body[data-theme="dark"] #toggle-mode {
+  background-color: #6bdbdf;
+  color: white;
+  border: 1px solid #6bdbdf;
+}
+
+body[data-theme="dark"] .container {
+  background-color: #6bdbdf;
+  border: 1px solid #6c757d;
+}
+
+body[data-theme="dark"] button {
+  background-color: #116b80;
+  color: white;
+}
+
+body[data-theme="dark"] .menu a {
+  background-color: #116b80;
+  color: white;
+}
+
+body[data-theme="dark"] button:hover {
+  background-color: #9be3e5;
+}
+
+body[data-theme="dark"] .menu a:hover {
+  background-color: #9be3e5;
+}
+
+/* 深色模式下的食物日曆樣式 */
+body[data-theme="dark"] .vue-simple-calendar {
+  background-color: #222222;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .vue-simple-calendar .day {
+  background-color: #333333;
+  color: #f8f9fa;
+}
+
+body[data-theme="dark"] .vue-simple-calendar .day:hover {
+  background-color: #444444;
+}
+
+/* 深色模式下的健康提醒樣式 */
+body[data-theme="dark"] .health-reminder {
+  background-color: #222222;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .health-reminder .reminder-item {
+  background-color: #333333;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .health-reminder .reminder-item:hover {
+  background-color: #444444;
+}
+
+/* 深色模式下的個人化推薦樣式 */
+body[data-theme="dark"] .personalized-recommendation {
+  background-color: #222222;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .personalized-recommendation .recommendation-item {
+  background-color: #333333;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .personalized-recommendation .recommendation-item:hover {
+  background-color: #444444;
+}
+
+/* 深色模式下的設定中的健康提醒樣式 */
+body[data-theme="dark"] .settings-section .health-reminder {
+  background-color: #222222;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .settings-section .health-reminder .reminder-item {
+  background-color: #333333;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] .settings-section .health-reminder .reminder-item:hover {
+  background-color: #444444;
+}
+
+/* 深色模式下的健康提醒頁面樣式 */
+body[data-theme="dark"] #reminder-settings {
+  background-color: #222222;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] #reminder-settings label {
+  color: #f8f9fa;
+}
+
+body[data-theme="dark"] #reminder-settings input {
+  background-color: #333333;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+body[data-theme="dark"] #reminder-settings input::placeholder {
+  color: #aaaaaa;
+}
+
+body[data-theme="dark"] #reminder-settings button {
+  background-color: #444444; /* 調整為更亮的灰色 */
+  color: #ffffff; /* 確保文字顯眼 */
+  border: 1px solid #666666;
+}
+
+body[data-theme="dark"] #reminder-settings button:hover {
+  background-color: #555555; /* 提高 hover 狀態的對比度 */
+}
+
+/* 深色模式下的返回按鈕樣式 */
+body[data-theme="dark"] a {
+  color: #ffffff; /* 字體顏色設為白色 */
+}
+
+body[data-theme="dark"] a:hover {
+  color: #cccccc; /* hover 狀態設為較亮的灰色 */
+  text-decoration: underline;
+}
+
+/* 深色模式下的輸入框與按鈕修正 */
+body[data-theme="dark"] input,
+body[data-theme="dark"] button {
+  background-color: #333333;
+  color: #f8f9fa;
+  border: 1px solid #444444;
+}
+
+body[data-theme="dark"] input::placeholder {
+  color: #aaaaaa;
+}
+
+/* 表單樣式 */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+form input,
+form button {
+  margin-bottom: 1rem;
+}
+
+form button:last-child {
+  margin-bottom: 0;
+}
+
+/* 連結樣式 */
+.link {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #4CAF50;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* 危險操作按鈕 */
+button.danger {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.danger:hover {
+  background-color: #c0392b;
+}
+
+/* 通用按鈕樣式 */
+button, .update-btn, #delete-account-btn, .logout {
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* 通用按鈕 hover 樣式 */
+button:hover, .update-btn:hover, #delete-account-btn:hover, .logout:hover {
+  opacity: 0.9;
+}
+
+/* 更新密碼與新增暱稱按鈕樣式 */
+.update-btn {
+  background-color: #9be3e5;
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #86cbd4;
+}
+
+/* 刪除帳號按鈕樣式 */
+#delete-account-btn {
+  background-color: #bd3b3b;
+  color: white;
+}
+
+#delete-account-btn:hover {
+  background-color: #a33232;
+}
+
+/* 登出按鈕樣式 */
+.logout {
+  background-color: #bd3b3b;
+  color: white;
+}
+
+.logout:hover {
+  background-color: #a33232;
+}
+
+/* 深色模式下的按鈕樣式 */
+body[data-theme="dark"] button, 
+body[data-theme="dark"] .update-btn, 
+body[data-theme="dark"] #delete-account-btn, 
+body[data-theme="dark"] .logout {
+  background-color: #444444; /* 調整為更亮的灰色 */
+  color: #ffffff; /* 確保文字顯眼 */
+  border: 1px solid #666666;
+}
+
+body[data-theme="dark"] button:hover, 
+body[data-theme="dark"] .update-btn:hover, 
+body[data-theme="dark"] #delete-account-btn:hover, 
+body[data-theme="dark"] .logout:hover {
+  background-color: #555555; /* 提高 hover 狀態的對比度 */
+}
+
+/* 設定區塊樣式 */
+.settings-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+/* 管理帳號輸入框樣式 */
+#update-account-form input,
+#update-nickname-form input {
+  margin-bottom: 1rem;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 管理帳號按鈕樣式 */
+#update-account-form button,
+#update-nickname-form button,
+#delete-account-btn {
+  margin-top: 1rem;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#recipe-list {
+  margin-top: 20px;
+}
+
+.recipe {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.recipe img {
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.vue-simple-calendar {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.vue-simple-calendar .day {
+  cursor: pointer;
+  text-align: center;
+}
+
+.vue-simple-calendar .day:hover {
+  background-color: #f0f0f0;
+}
+

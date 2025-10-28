@@ -1,0 +1,15 @@
+{
+  "steps": [
+    {
+      "step": "register_error",
+      "error": "fetch failed"
+    },
+    {
+      "step": "login_error",
+      "error": "fetch failed"
+    },
+    {
+      "note": "no token obtained, aborting remaining steps"
+    }
+  ]
+}

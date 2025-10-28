@@ -1,0 +1,49 @@
+<!-- 健康提醒頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧飲食管家｜健康提醒</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" id="app">
+    <h1>健康提醒</h1>
+    <p>設定提醒時間，讓我們幫助您保持健康的生活習慣。</p>
+    <div id="reminder-settings">
+      <form id="reminder-form">
+        <label for="water-reminder">飲水提醒時間：</label>
+        <input type="time" id="water-reminder" name="water-reminder">
+        <br>
+        <label for="meal-reminder">飲食提醒時間：</label>
+        <input type="time" id="meal-reminder" name="meal-reminder">
+        <br>
+        <button type="button" id="save-reminder">儲存設定</button>
+      </form>
+    </div>
+    <a href="javascript:history.back()">← 返回上一頁</a>
+  </div>
+</body>
+<script src="health-reminder.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      theme: localStorage.getItem('theme') || 'light'
+    },
+    methods: {
+      toggleTheme() {
+        this.theme = this.theme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', this.theme);
+        document.body.setAttribute('data-theme', this.theme); // 確保屬性更新
+      }
+    },
+    mounted() {
+      if (!document.body.hasAttribute('data-theme')) {
+        document.body.setAttribute('data-theme', this.theme); // 初始化時正確設定屬性
+      }
+    }
+  });
+</script>
+</html>

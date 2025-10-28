@@ -1,0 +1,27 @@
+<!-- 食譜推薦頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧飲食管家｜食譜推薦</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+  <div class="container">
+    <h1>食譜推薦</h1>
+    <p>根據您的飲食偏好，我們將推薦適合的食譜。</p>
+    <button id="recommend-btn">推薦食譜</button>
+    <div id="recipe-list">
+      <!-- JS 顯示推薦食譜 -->
+    </div>
+    <a href="javascript:history.back()">← 返回上一頁</a>
+  </div>
+</body>
+<script src="recipe-recommendation.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.body.setAttribute("data-theme", savedTheme);
+  });
+</script>

@@ -1,0 +1,58 @@
+<!-- 設定頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設定</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body :data-theme="theme">
+    <div class="container" id="app">
+        <header>
+            <h2>設定</h2>
+        </header>
+        <main>
+            <section class="settings-section">
+                <h3>外觀設定</h3>
+                <button id="toggle-mode" @click="toggleTheme">切換背景模式</button>
+            </section>
+            <section class="settings-section">
+                <h3>管理帳號</h3>
+                <form id="update-password-form" aria-label="更新密碼">
+                    <label for="new-password">新密碼</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="新密碼" required>
+                    <button type="submit" class="update-btn">更新密碼</button>
+                </form>
+                <form id="update-nickname-form" aria-label="更新暱稱">
+                    <label for="new-nickname">新暱稱</label>
+                    <input type="text" id="new-nickname" name="new-nickname" placeholder="新暱稱" class="nickname-input" required>
+                    <button type="submit" class="update-btn">更新暱稱</button>
+                </form>
+                <button id="delete-account-btn" class="danger">刪除帳號</button>
+            </section>
+        </main>
+        <footer>
+            <a href="home.html" class="link">返回主頁面</a>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                theme: localStorage.getItem('theme') || 'light'
+            },
+            methods: {
+                toggleTheme() {
+                    this.theme = this.theme === 'light' ? 'dark' : 'light';
+                    localStorage.setItem('theme', this.theme);
+                }
+            },
+            mounted() {
+                document.body.setAttribute('data-theme', this.theme);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!-- 主頁面 -->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧飲食管家系統</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* 美化間距 */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .menu a, .menu button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .menu a:hover, .menu button:hover {
+            background-color: #e0e0e0;
+        }
+        .logout {
+            background-color: #ffcccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>智慧飲食管家系統</h1>
+    </header>
+
+    <div class="container">
+    <h2 id="welcome-h2">歡迎回來，使用者！</h2>
+        <!-- 使用者暱稱將由 script.js 動態更新 -->
+        <div class="menu">
+            <a href="add_meal.html">➕ 新增飲食紀錄</a>
+            <a href="view_meals.html">📖 查看飲食紀錄</a>
+            <a href="personalized-settings.html">🌟 個人化推薦與設定</a>
+            <a href="statistics.html">📊 統計分析</a>
+            <a href="settings.html">⚙️ 設定</a>
+            <a href="http://localhost:3000/auth/google" style="background:#4285F4;color:white;">使用 Google 登入/綁定帳號</a>
+            <button id="logout-btn" class="logout">登出</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> 
+    <script>
+        // 若有 token 或 nickname，顯示於頁面
+        document.addEventListener('DOMContentLoaded', () => {
+            const nickname = sessionStorage.getItem('currentNickname');
+            if (nickname) document.getElementById('welcome-h2').textContent = `歡迎回來，${nickname}！`;
+            // if token present, you may fetch profile from backend later
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理後台</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>管理後台</h1>
+    <p>請以管理員帳號登入，頁面會列出所有使用者。</p>
+    <div id="users-list">載入中...</div>
+    <a href="home.html">← 返回主頁</a>
+  </div>
+  <script>
+    async function loadUsers() {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) { document.getElementById('users-list').innerText = '請先登入管理員帳號。'; return; }
+      const resp = await fetch('http://localhost:3000/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
+      const data = await resp.json();
+      if (!resp.ok) { document.getElementById('users-list').innerText = JSON.stringify(data); return; }
+      const users = data.data || [];
+      const el = document.getElementById('users-list');
+      el.innerHTML = users.map(u => `
+        <div style="border:1px solid #ddd;padding:8px;margin:6px;">
+          <strong>${u.username}</strong> (${u.nickname || ''})
+          <button onclick="deleteUser(${u.id})" style="float:right">刪除</button>
+        </div>
+      `).join('');
+    }
+
+    async function deleteUser(id) {
+      if (!confirm('確定要刪除此使用者嗎？')) return;
+      const token = sessionStorage.getItem('authToken');
+      const resp = await fetch('http://localhost:3000/api/users/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } });
+      if (resp.ok) { alert('刪除成功'); loadUsers(); } else { alert('刪除失敗'); }
+    }
+
+    loadUsers();
+  </script>
+</body>
+</html>

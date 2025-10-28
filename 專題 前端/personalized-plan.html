@@ -1,0 +1,51 @@
+<!-- 個性化飲食計畫頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧飲食管家｜個性化飲食計畫</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+  <div class="container">
+    <h1>個性化飲食計畫</h1>
+    <p>根據您的目標（減脂/增肌/維持體態），我們將為您生成建議餐點。</p>
+    <div>
+      <label for="goal-select">選擇您的目標：</label>
+      <select id="goal-select">
+        <option value="減脂">減脂</option>
+        <option value="增肌">增肌</option>
+        <option value="維持體態">維持體態</option>
+      </select>
+    </div>
+    <div>
+      <label for="dailyCalories">每日目標熱量 (kcal)：</label>
+      <input type="number" id="dailyCalories" min="0" />
+    </div>
+    <div>
+      <label for="targetWeight">目標體重 (kg)：</label>
+      <input type="number" id="targetWeight" step="0.1" />
+    </div>
+    <div>
+      <label for="mealDistribution">餐別分配 (早餐:30,午餐:40,晚餐:30)：</label>
+      <input type="text" id="mealDistribution" placeholder="早餐:30,午餐:40,晚餐:30" />
+    </div>
+    <div style="margin-top:10px;">
+      <button id="save-goals">儲存設定</button>
+      <button id="generate-plan">生成建議</button>
+    </div>
+    <div id="plan-result">
+      <!-- JS 生成建議餐點 -->
+    </div>
+    <a href="javascript:history.back()">← 返回上一頁</a>
+  </div>
+</body>
+<script src="personalized-plan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.body.setAttribute("data-theme", savedTheme);
+  });
+</script>
+</html>
