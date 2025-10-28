@@ -1,31 +1,62 @@
-# project
-我的專題
+Diet-server (後端)
 
-用戶介面子系統功能（網頁）：
-a. 食物紀錄功能：用戶可以輕鬆輸入每日攝取的食物。  
-b. 個性化飲食計畫：根據用戶的健康目標提供個性化的飲食建議，並自
-動生成每日餐點安排。  
-c. 食譜推薦功能：根據用戶的飲食偏好推薦適合的食譜。  
-d. 健康指標追蹤：用戶可以記錄體重、運動量等健康數據，系統生成圖
-表分析進展。  
-B. 食物日曆子系統功能（網頁）：
-a. 餐點計劃功能：用戶可以在日曆上規劃每日的餐點，方便管理每週的
-飲食安排。  
-b. 健康提醒功能：系統可以設定每日的飲水提醒和健康飲食提示，幫助
-用戶養成良好的飲食習慣。  
-c. 統計報告功能：提供每月的飲食回顧報告，幫助用戶了解自己的飲食
-習慣。  
-C. 管理後台子系統功能（應用程式）：
-a. 用戶管理功能：用戶可以查看用戶數據和飲食紀錄，進行數據分析。
-b. 內容管理功能：用戶可以更新食譜庫、飲食計畫模板及健康提示。  
-c. 統計分析功能：生成用戶活躍度報告及整體飲食趨勢分析。
+簡介
+- Express + MySQL 後端，已新增基本的使用者認證與 Food CRUD 範例。
 
-前端：HTML/CSS：用於頁面的結構與樣式設計。
-JavaScript：用於實現頁面的互動性。
-前端框架Vue.js：提升開發效率及用戶體驗。
-• 後端：Node.js：用於伺服器端開發。
-Express.js：用於處理路由和中介軟體。
-MySQL：用於數據存儲。
-• 開發工具：Git：版本控制工具，協作開發時使用。
-Visual Studio Code：編輯程式碼的集成開發環境。
-Postman：測試 API 的工具
+
+環境變數
+- 將 `.env.example` 複製為 `.env` 並填入資料庫資訊與 `JWT_SECRET`。
+
+SQLite (快速在本機開發)
+- 若你沒有 MySQL，可用 SQLite 快速啟動：在 `.env` 中加入 `USE_SQLITE=yes`。
+- 可選 `SQLITE_FILE` 指定資料庫檔案位置（預設 `./data/diet.db`）。
+
+快速啟動（SQLite）
+1. npm install
+2. 在 `.env` 設定：
+	USE_SQLITE=yes
+	SQLITE_FILE=./data/diet.db
+3. 若要建立 schema：執行 Node 腳本或使用 sqlite3 CLI 匯入 `migrations/init.sqlite.sql`。
+4. npm run start
+
+快速啟動（MySQL）
+1. npm install
+2. 建立資料庫並匯入 `migrations/init.sql`
+3. 設定 `.env` 的 DB_HOST/DB_USER/DB_PASSWORD/DB_NAME
+4. npm run start
+
+主要 API
+- POST /api/register { username, password, nickname? } -> 註冊，回傳 JWT
+- POST /api/login { username, password } -> 登入，回傳 JWT
+- GET /api/foods (auth) -> 取得該使用者食物紀錄
+- POST /api/foods (auth) -> 新增食物紀錄 { food_name, calories, meal_type }
+- PUT /api/foods/:id (auth) -> 更新紀錄
+- DELETE /api/foods/:id (auth) -> 刪除紀錄
+- GET /api/users -> 取得使用者列表（管理用途）
+
+
+測試 DB
+- GET /test-db
+
+備註
+- 使用者密碼以 bcrypt 儲存在資料庫，認證使用 JWT。前端需要在 Authorization header 中帶上 `Bearer <token>`。
+
+下一步建議
+- 把前端的登入/註冊與食物紀錄呼叫改成使用 API（取代 localStorage 直接存取）。
+- 加入 Google OAuth2 與 AI 推薦（可在此基礎上延伸）。
+
+Google OAuth2 (選用)
+1. 建立 Google Cloud OAuth 2.0 credentials：
+	- 到 Google Cloud Console -> APIs & Services -> Credentials -> Create Credentials -> OAuth client ID
+	- 設定應用類型為 Web application，加入 Authorized redirect URI，例如 `http://localhost:3000/auth/google/callback`
+	- 取得 `CLIENT_ID` 與 `CLIENT_SECRET`。
+2. 在 `.env` 加入：
+	GOOGLE_CLIENT_ID=your_client_id
+	GOOGLE_CLIENT_SECRET=your_client_secret
+	GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+	FRONTEND_URL=http://localhost:5500/home.html
+3. 安裝依賴（已加入於 package.json）： `passport` 與 `passport-google-oauth20`。
+4. 啟動 server，前往 `http://localhost:3000/auth/google` 即可開始 OAuth 流程。
+
+登入成功後 server 會在 redirect 回前端的 URL（`FRONTEND_URL`）並在 fragment 中帶上 `#token=<jwt>`，前端可在載入時檢查 location.hash 並儲存 token 到 sessionStorage。
+
