@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!-- 登入頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -59,65 +59,3 @@
   </script>
 </body>
 </html>
-=======
-<!-- 登入頁面 -->
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>智慧飲食管家｜登入</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>登入系統</h1>
-    <form id="login-form">
-      <input id="username" type="text" placeholder="帳號" required>
-      <input id="password" type="password" placeholder="密碼" required>
-      <button type="submit">登入</button>
-      <p>還沒有帳號？<a href="register.html">前往註冊</a></p>
-    </form>
-  </div>
-  <script>
-    // 確保 DOM 完全載入後執行
-    document.addEventListener('DOMContentLoaded', function () {
-      const loginForm = document.getElementById('login-form');
-      loginForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
-
-        // 從 localStorage 取得已註冊的使用者資料
-        const storedUser = JSON.parse(localStorage.getItem(username));
-
-        if (storedUser) {
-          // 驗證密碼
-          const hashedPassword = await hashPassword(password);
-          if (storedUser.password === hashedPassword) {
-            alert('登入成功！');
-            sessionStorage.setItem('currentUser', username);
-            sessionStorage.setItem('currentNickname', storedUser.nickname);
-            window.location.href = 'home.html'; // 導向主頁
-          } else {
-            alert('密碼錯誤！');
-          }
-        } else {
-          alert('帳號不存在！');
-        }
-      });
-    });
-
-    // 密碼雜湊函數
-    async function hashPassword(password) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(password);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-      return Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-    }
-  </script>
-</body>
-</html>
->>>>>>> 5d447e9 (10/28完成)

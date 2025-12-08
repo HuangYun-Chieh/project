@@ -3,31 +3,23 @@
     {
       "step": "register",
       "status": 200,
-      "body": "{\"success\":true,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksInVzZXJuYW1lIjoiaXRlc3RfMTc2MTYyNjIyMTI2OSIsImlhdCI6MTc2MTYyNjIyMSwiZXhwIjoxNzYyMjMxMDIxfQ.QD0-bPRO1QmhyZqvWOFSwkFpMaXQzItHTA9KNXeMMG0\"}"
+      "body": "{\"success\":true,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksInVzZXJuYW1lIjoiaXRlc3RfMTc2NTE2NTU3NTA1OCIsImlhdCI6MTc2NTE2NTU3NiwiZXhwIjoxNzY1NzcwMzc2fQ.Bqfq2u_OL0fr6PaCjC6QOG4z0LWPygPTemIFZ43J88w\"}"
     },
     {
       "step": "login",
       "status": 200,
       "body": {
         "success": true,
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksInVzZXJuYW1lIjoiaXRlc3RfMTc2MTYyNjIyMTI2OSIsImlhdCI6MTc2MTYyNjIyMSwiZXhwIjoxNzYyMjMxMDIxfQ.QD0-bPRO1QmhyZqvWOFSwkFpMaXQzItHTA9KNXeMMG0",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksInVzZXJuYW1lIjoiaXRlc3RfMTc2NTE2NTU3NTA1OCIsImlhdCI6MTc2NTE2NTU3NiwiZXhwIjoxNzY1NzcwMzc2fQ.Bqfq2u_OL0fr6PaCjC6QOG4z0LWPygPTemIFZ43J88w",
         "nickname": "ITest"
       }
     },
     {
       "step": "post_goals",
-      "status": 200,
+      "status": 500,
       "body": {
-        "success": true,
-        "data": {
-          "id": 17,
-          "user_id": 19,
-          "goalType": "減脂",
-          "dailyCalories": 1500,
-          "targetWeight": 65,
-          "mealDistribution": "早餐:30,午餐:40,晚餐:30",
-          "updated_at": "2025-10-28T04:37:01.704Z"
-        }
+        "success": false,
+        "error": "EPERM: operation not permitted, rename 'E:\\專題 後端\\diet-server\\data\\.db.json.tmp' -> 'E:\\專題 後端\\diet-server\\data\\db.json'"
       }
     },
     {
@@ -35,21 +27,13 @@
       "status": 200,
       "body": {
         "success": true,
-        "data": {
-          "id": 17,
-          "user_id": 19,
-          "goalType": "減脂",
-          "dailyCalories": 1500,
-          "targetWeight": 65,
-          "mealDistribution": "早餐:30,午餐:40,晚餐:30",
-          "updated_at": "2025-10-28T04:37:01.704Z"
-        }
+        "data": null
       }
     },
     {
       "step": "report_json",
       "status": 200,
-      "body": "{\"success\":true,\"data\":{\"totalRecords\":3,\"totalCalories\":1400,\"daily\":{\"2025-10-28\":1400},\"mostCommon\":[{\"name\":\"晚餐 2025-10-28 - 青菜豆腐\",\"count\":1},{\"name\":\"午餐 2025-10-28 - 雞肉飯\",\"count\":1},{\"name\":\"早餐 2025-10-28 - 蛋饅頭\",\"count\":1}]}}"
+      "body": "{\"success\":true,\"data\":{\"totalRecords\":3,\"totalCalories\":1400,\"daily\":{\"2025-12-08\":1400},\"mostCommon\":[{\"name\":\"晚餐 2025-12-08 - 青菜豆腐\",\"count\":1},{\"name\":\"午餐 2025-12-08 - 雞肉飯\",\"count\":1},{\"name\":\"早餐 2025-12-08 - 蛋饅頭\",\"count\":1}]}}"
     },
     {
       "step": "report_csv_status",
@@ -81,21 +65,21 @@
       "status": 200,
       "body": {
         "success": true,
-        "id": 52
+        "id": 111
       }
     },
     {
       "status": 200,
       "body": {
         "success": true,
-        "id": 53
+        "id": 112
       }
     },
     {
       "status": 200,
       "body": {
         "success": true,
-        "id": 54
+        "id": 113
       }
     }
   ],

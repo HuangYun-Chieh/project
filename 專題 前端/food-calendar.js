@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ HEAD
 new Vue({
   el: '#app',
   data: {
@@ -88,7 +88,7 @@ function replaceSlot(original, slot, value) {
   }
   return original + '\n' + `${slot}: ${value}`;
 }
-=======
+
 new Vue({
   el: '#app',
   data: {
@@ -178,4 +178,4 @@ function replaceSlot(original, slot, value) {
   }
   return original + '\n' + `${slot}: ${value}`;
 }
->>>>>>> 5d447e9 (10/28完成)
+
