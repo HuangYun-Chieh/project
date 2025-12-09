@@ -1,13 +1,24 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path'); // 1. 把它移到最上面！
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const app = express();
+
+// 2. 正確宣告 frontendPath 變數
+// 往上跳兩層 (../../) 去找 "專題 前端" 資料夾
+const frontendPath = path.join(__dirname, '../../專題 前端');
+
+console.log('前端網頁路徑設為:', frontendPath); // 3. 這樣印出來才不會報錯
+
+// 4. 告訴伺服器去那個路徑找檔案
+app.use(express.static(frontendPath));
+
 const db = require('./db');
 console.log('db module keys at require time ->', Object.keys(db).sort());
-// ensure lowdb initialized if used
-// try to initialize lowdb if available (safe no-op for SQL adapter)
+
 if (db && db.init && typeof db.init === 'function') {
   db.init().catch(err => console.error('DB init error', err));
 }
@@ -71,7 +82,9 @@ app.get('/auth/google/callback', passport.authenticate('google', { session: fals
   res.redirect(`${redirectTo}#token=${token}`);
 });
 
-app.get('/', (req, res) => res.send('服務器運作正常'));
+app.get('/', (req, res) => {
+  res.redirect('/home.html'); 
+});
 
 app.get('/test-db', async (req, res) => {
   try {
