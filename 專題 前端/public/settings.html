@@ -1,5 +1,3 @@
-
-<!-- 設定頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -7,6 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>設定</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+
+        .reminder-card {
+            background: #fff;
+            border-radius: 15px;
+            border: 3px solid #FFB6C1; 
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            padding: 25px;
+            margin-top: 15px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .setting-item {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #FFF5F7; 
+            padding: 15px; border-radius: 12px; margin-bottom: 15px;
+            border: 1px solid #FFE0E6; transition: 0.3s;
+        }
+        .setting-item:hover { border-color: #FFB6C1; transform: translateY(-2px); }
+
+        .item-left { display: flex; align-items: center; }
+        .icon-box {
+            width: 40px; height: 40px; background: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .setting-label { font-weight: bold; color: #555; font-size: 1rem; }
+        .setting-sub { font-size: 0.8rem; color: #999; }
+
+        .time-input {
+            border: 2px solid #FFB6C1; border-radius: 8px; padding: 5px 10px;
+            font-size: 1rem; color: #555; outline: none; background: #fff; cursor: pointer;
+        }
+        .time-input:focus { border-color: #FF4757; }
+
+        .btn-save-pink {
+            width: 100%; padding: 12px; border: none; border-radius: 8px;
+            background: #FF6B81; color: white; font-weight: bold; cursor: pointer;
+            margin-top: 10px; transition: 0.2s; font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+        }
+        .btn-save-pink:hover { background: #FF4757; transform: translateY(-2px); }
+    </style>
 </head>
 <body :data-theme="theme">
     <div class="container" id="app">
@@ -18,6 +61,40 @@
                 <h3>外觀設定</h3>
                 <button id="toggle-mode" @click="toggleTheme">切換背景模式</button>
             </section>
+
+            <section class="settings-section">
+                <h3>健康提醒</h3>
+                <div class="reminder-card">
+                    <div style="text-align:center; color:#888; margin-bottom:20px; font-size:0.9rem;">
+                        設定時間，養成健康好習慣。
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="item-left">
+                            <div class="icon-box">💧</div>
+                            <div>
+                                <div class="setting-label">飲水提醒</div>
+                                <div class="setting-sub">記得補充水分</div>
+                            </div>
+                        </div>
+                        <input type="time" id="water-reminder" class="time-input">
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="item-left">
+                            <div class="icon-box">🍱</div>
+                            <div>
+                                <div class="setting-label">用餐紀錄</div>
+                                <div class="setting-sub">提醒紀錄熱量</div>
+                            </div>
+                        </div>
+                        <input type="time" id="meal-reminder" class="time-input">
+                    </div>
+
+                    <button id="save-reminder" class="btn-save-pink">💾 儲存設定</button>
+                </div>
+            </section>
+
             <section class="settings-section">
                 <h3>管理帳號</h3>
                 <form id="update-password-form" aria-label="更新密碼">
@@ -37,23 +114,8 @@
             <a href="home.html" class="link">返回主頁面</a>
         </footer>
     </div>
+
     <script src="script.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                theme: localStorage.getItem('theme') || 'light'
-            },
-            methods: {
-                toggleTheme() {
-                    this.theme = this.theme === 'light' ? 'dark' : 'light';
-                    localStorage.setItem('theme', this.theme);
-                }
-            },
-            mounted() {
-                document.body.setAttribute('data-theme', this.theme);
-            }
-        });
-    </script>
+    <script src="settings.js"></script>
 </body>
 </html>

@@ -1,41 +1,247 @@
-<!-- 食物日曆頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>智慧飲食管家｜食物日曆</title>
-  <link rel="stylesheet" href="style.css">
+  
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script src="https://unpkg.com/vue-simple-calendar@4"></script>
-  <link rel="stylesheet" href="https://unpkg.com/vue-simple-calendar@4/dist/vue-simple-calendar.min.css">
+
+  <style>
+    /* ★★★ 粉紅日曆樣式 ★★★ */
+    body {
+        background-color: #FFF0F5;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0; padding: 20px;
+        color: #333;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 20px;
+        border: 3px solid #FFB6C1;
+        box-shadow: 0 10px 25px rgba(255, 182, 193, 0.2);
+        padding: 30px;
+        min-height: 80vh;
+    }
+
+    h1 { color: #FF6B81; text-align: center; margin: 0 0 5px 0; }
+    p.subtitle { text-align: center; color: #888; margin: 0 0 25px 0; }
+
+    /* 日曆頭部 */
+    .calendar-header {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 20px; font-size: 1.5rem; font-weight: bold; color: #FF6B81;
+    }
+    .nav-btn {
+        cursor: pointer; user-select: none; padding: 5px 15px; border-radius: 50%;
+        transition: 0.2s;
+    }
+    .nav-btn:hover { background-color: #FFF0F3; }
+
+    /* 星期標題 */
+    .weekdays {
+        display: grid; grid-template-columns: repeat(7, 1fr);
+        text-align: center; font-weight: bold; color: #aaa; margin-bottom: 10px;
+    }
+
+    /* 日期格子區 */
+    .days-grid {
+        display: grid; grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+    }
+
+    /* 每一天的格子 */
+    .day-cell {
+        background: #fff;
+        border: 1px solid #FFE0E6;
+        border-radius: 12px;
+        min-height: 100px;
+        padding: 5px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex; flex-direction: column;
+    }
+    .day-cell:hover {
+        border-color: #FF6B81;
+        box-shadow: 0 4px 10px rgba(255, 107, 129, 0.15);
+        transform: translateY(-2px);
+    }
+    .day-cell.empty { border: none; cursor: default; background: transparent; }
+    
+    .date-num {
+        font-weight: bold; font-size: 0.9rem; color: #555;
+        margin-bottom: 5px; align-self: flex-end;
+        width: 25px; height: 25px; text-align: center; line-height: 25px;
+        border-radius: 50%;
+    }
+    
+    .day-cell.today { border: 2px solid #FF6B81; }
+    .day-cell.today .date-num { background-color: #FF6B81; color: white; }
+
+    /* ★★★ 餐點標籤顏色設定 ★★★ */
+    .meal-tag {
+        font-size: 0.75rem; color: white; padding: 2px 6px;
+        border-radius: 4px; margin-bottom: 3px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .bg-breakfast { background-color: #FF9F43; } /* 早餐：橘色 */
+    .bg-lunch { background-color: #54a0ff; }     /* 午餐：藍色 */
+    .bg-dinner { background-color: #FF6B81; }    /* 晚餐：粉色 */
+    .bg-snack { background-color: #2ecc71; }     /* 點心：綠色 */
+
+    /* 圖例說明區 */
+    .legend {
+        display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+        font-size: 0.9rem; color: #666;
+    }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    .btn-back {
+        display: block; margin: 30px auto 0; width: fit-content;
+        color: #999; text-decoration: none; font-size: 0.9rem;
+        padding: 8px 20px; border-radius: 20px; border: 1px solid transparent;
+        transition: 0.3s;
+    }
+    .btn-back:hover { border-color: #FF6B81; color: #FF6B81; background: #FFF0F3; }
+  </style>
 </head>
-<body :data-theme="theme">
-  <div class="container" id="app">
-    <h1>食物日曆</h1>
-    <p>安排每天的餐點，讓您的飲食更有規劃。</p>
-    <vue-simple-calendar 
-      @day-click="handleDayClick"
-      :show-event-times="false"
-    ></vue-simple-calendar>
-    <a href="#" onclick="history.back()">← 返回上一頁</a>
-  </div>
-</body>
-<script src="food-calendar.js"></script>
+<body data-theme="light">
+
+<div class="container" id="app">
+    <h1>📅 食物日曆</h1>
+    <p class="subtitle">您的飲食足跡，一目了然。</p>
+
+    <div class="calendar-header">
+        <div class="nav-btn" @click="changeMonth(-1)">&#10094;</div>
+        <div>{{ currentYear }}年 {{ currentMonth + 1 }}月</div>
+        <div class="nav-btn" @click="changeMonth(1)">&#10095;</div>
+    </div>
+
+    <div class="weekdays">
+        <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+    </div>
+
+    <div class="days-grid">
+        <div v-for="n in paddingDays" :key="'pad-'+n" class="day-cell empty"></div>
+
+        <div v-for="day in daysInMonth" :key="day" 
+             class="day-cell" 
+             :class="{ today: isToday(day) }"
+             @click="handleDayClick(day)">
+            
+            <div class="date-num">{{ day }}</div>
+            
+            <div v-for="(meal, idx) in getMealsForDay(day)" :key="idx">
+                <div class="meal-tag" :class="getMealColor(meal.type)">
+                    {{ meal.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-dot bg-breakfast"></div>早餐</div>
+        <div class="legend-item"><div class="legend-dot bg-lunch"></div>午餐</div>
+        <div class="legend-item"><div class="legend-dot bg-dinner"></div>晚餐</div>
+        <div class="legend-item"><div class="legend-dot bg-snack"></div>點心</div>
+    </div>
+
+    <a href="home.html" class="btn-back">← 返回主頁</a>
+</div>
+
 <script>
-  new Vue({
+new Vue({
     el: '#app',
     data: {
-      theme: localStorage.getItem('theme') || 'light'
+        currentYear: new Date().getFullYear(),
+        currentMonth: new Date().getMonth(),
+        today: new Date(),
+        mealData: {} 
     },
-    methods: {
-      toggleTheme() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-        localStorage.setItem('theme', this.theme);
-      }
+    computed: {
+        daysInMonth() { return new Date(this.currentYear, this.currentMonth + 1, 0).getDate(); },
+        paddingDays() { return new Date(this.currentYear, this.currentMonth, 1).getDay(); }
     },
     mounted() {
-      document.body.setAttribute('data-theme', this.theme);
+        this.generateMockData();
+    },
+    methods: {
+        isToday(day) {
+            return this.today.getDate() === day && 
+                   this.today.getMonth() === this.currentMonth && 
+                   this.today.getFullYear() === this.currentYear;
+        },
+        changeMonth(delta) {
+            let newMonth = this.currentMonth + delta;
+            if (newMonth > 11) { this.currentMonth = 0; this.currentYear++; } 
+            else if (newMonth < 0) { this.currentMonth = 11; this.currentYear--; } 
+            else { this.currentMonth = newMonth; }
+            this.generateMockData();
+        },
+        getMealsForDay(day) {
+            const key = `${this.currentYear}-${this.currentMonth+1}-${day}`;
+            return this.mealData[key] || [];
+        },
+        
+        // ★★★ 顏色判斷邏輯 (新增點心) ★★★
+        getMealColor(type) {
+            if (type === '早餐') return 'bg-breakfast';
+            if (type === '午餐') return 'bg-lunch';
+            if (type === '晚餐') return 'bg-dinner';
+            if (type === '點心') return 'bg-snack'; // 新增點心顏色
+            return 'bg-snack'; // 預設值
+        },
+
+        // 點擊新增
+        handleDayClick(day) {
+            const input = prompt(`✏️ 新增 ${this.currentMonth+1}月${day}日 的紀錄：\n(輸入內容，系統會自動判斷餐別，例如：早餐 蛋餅)`);
+            if (input) {
+                let type = '點心'; // 預設為點心
+                if (input.includes('早')) type = '早餐';
+                if (input.includes('午')) type = '午餐';
+                if (input.includes('晚')) type = '晚餐';
+
+                const key = `${this.currentYear}-${this.currentMonth+1}-${day}`;
+                if (!this.mealData[key]) this.$set(this.mealData, key, []);
+                
+                this.mealData[key].push({ type: type, name: input });
+                alert(`✅ 已新增一筆 [${type}] 紀錄！`);
+            }
+        },
+
+        // 生成假資料 (包含點心)
+        generateMockData() {
+            const data = {};
+            const foodList = [
+                {n:'鮪魚蛋餅', t:'早餐'}, {n:'雞腿便當', t:'午餐'}, {n:'牛肉麵', t:'晚餐'},
+                {n:'無糖豆漿', t:'早餐'}, {n:'排骨飯', t:'午餐'}, {n:'燙青菜', t:'晚餐'},
+                {n:'便利商店飯糰', t:'早餐'}, {n:'義大利麵', t:'午餐'}, {n:'小火鍋', t:'晚餐'},
+                // 新增一些點心
+                {n:'珍珠奶茶', t:'點心'}, {n:'雞蛋糕', t:'點心'}, {n:'水果', t:'點心'}, {n:'優格', t:'點心'}
+            ];
+
+            const days = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+            for (let d = 1; d <= days; d++) {
+                if (Math.random() > 0.3) {
+                    const key = `${this.currentYear}-${this.currentMonth+1}-${d}`;
+                    const dailyMeals = [];
+                    const count = Math.ceil(Math.random() * 4); // 每天 1~4 餐
+                    for(let i=0; i<count; i++) {
+                        const food = foodList[Math.floor(Math.random() * foodList.length)];
+                        dailyMeals.push({ type: food.t, name: food.n });
+                    }
+                    data[key] = dailyMeals;
+                }
+            }
+            this.mealData = data;
+        }
     }
-  });
+});
 </script>
+
+</body>
+</html>

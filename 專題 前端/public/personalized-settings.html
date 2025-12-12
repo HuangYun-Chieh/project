@@ -1,29 +1,141 @@
-
-<!-- 個人化推薦與設定頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>智慧飲食管家｜個人化推薦與設定</title>
+  <title>智慧飲食管家｜個人化推薦</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ★★★ 粉紅選單專用樣式 ★★★ */
+    body {
+        background-color: #FFF0F5; /* 淺粉紅背景 */
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0; padding: 20px;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        background: linear-gradient(45deg, #FF6B81, #FFB6C1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+    }
+
+    /* 卡片網格佈局 */
+    .menu-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 兩欄 */
+        gap: 20px;
+    }
+
+    /* 按鈕卡片 */
+    .menu-card {
+        background: #fff;
+        border-radius: 20px;
+        border: 3px solid #FFB6C1;
+        padding: 30px 20px;
+        text-decoration: none; /* 移除超連結底線 */
+        color: #555;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 182, 193, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-5px); /* 浮起效果 */
+        border-color: #FF6B81;
+        box-shadow: 0 10px 25px rgba(255, 107, 129, 0.3);
+        background-color: #FFF5F7;
+    }
+
+    .menu-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        background: #FFF0F3;
+        width: 70px; height: 70px;
+        line-height: 70px;
+        border-radius: 50%;
+    }
+
+    .menu-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .menu-desc {
+        font-size: 0.85rem;
+        color: #999;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 40px;
+        color: #999;
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+    .btn-back:hover {
+        background: #fff;
+        color: #FF6B81;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body data-theme="light">
   <div class="container">
-    <h1>個人化推薦與設定</h1>
-    <ul style="list-style-type: none; padding: 0; margin: 0;">
-      <li style="margin-bottom: 10px;"><a href="personalized-plan.html">個性化飲食計畫</a></li>
-      <li style="margin-bottom: 10px;"><a href="recipe-recommendation.html">食譜推薦</a></li>
-      <li style="margin-bottom: 10px;"><a href="food-calendar.html">食物日曆</a></li>
-      <li><a href="health-reminder.html">健康提醒</a></li>
-    </ul>
-    <a href="home.html">← 回主頁</a>
+    <h1>✨ 個人化推薦與設定</h1>
+    
+    <div class="menu-grid">
+        <a href="personalized-plan.html" class="menu-card">
+            <div class="menu-icon">🎯</div>
+            <div class="menu-title">飲食目標設定</div>
+            <div class="menu-desc">減脂、增肌或維持</div>
+        </a>
+
+        <a href="recipe-recommendation.html" class="menu-card">
+            <div class="menu-icon">🍲</div>
+            <div class="menu-title">智慧食譜推薦</div>
+            <div class="menu-desc">不知道吃什麼？點我</div>
+        </a>
+
+        <a href="food-calendar.html" class="menu-card">
+            <div class="menu-icon">📅</div>
+            <div class="menu-title">飲食日曆</div>
+            <div class="menu-desc">檢視每日攝取紀錄</div>
+        </a>
+
+        <a href="health-reminder.html" class="menu-card">
+            <div class="menu-icon">⏰</div>
+            <div class="menu-title">健康提醒</div>
+            <div class="menu-desc">喝水與用餐通知</div>
+        </a>
+    </div>
+
+    <a href="home.html" class="btn-back">← 返回主頁</a>
   </div>
+
+  <script>
+    // 保持原本的主題讀取邏輯
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.body.setAttribute("data-theme", savedTheme);
+    });
+  </script>
 </body>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.body.setAttribute("data-theme", savedTheme);
-  });
-</script>
 </html>

@@ -1,5 +1,3 @@
-
-<!-- 統計分析頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -7,108 +5,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>智慧飲食管家｜統計分析</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* ★★★ 粉紅儀表板專用樣式 ★★★ */
+    body { background-color: #FFF0F5; font-family: 'Segoe UI', sans-serif; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    .stats-card {
+        background: #fff; border-radius: 20px;
+        border: 3px solid #FFB6C1; /* 粉紅框框 */
+        box-shadow: 0 10px 25px rgba(255, 182, 193, 0.2);
+        padding: 30px; text-align: center;
+    }
+    .stats-title { 
+        font-size: 2rem; color: #333; font-weight: bold; margin-bottom: 20px; 
+        background: linear-gradient(45deg, #FF6B81, #FFB6C1);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .chart-container {
+        background: #FFF5F7; border-radius: 15px; padding: 15px;
+        margin-bottom: 30px; border: 1px dashed #FFB6C1;
+        height: 350px; position: relative;
+    }
+    .input-area {
+        display: flex; gap: 10px; justify-content: center; align-items: center;
+        background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 30px;
+        border: 1px solid #eee;
+    }
+    .pink-input {
+        padding: 10px; border: 2px solid #FFE0E6; border-radius: 8px;
+        outline: none; transition: 0.3s; font-size: 1rem;
+    }
+    .pink-input:focus { border-color: #FF6B81; background: #fff; }
+    .btn-pink {
+        padding: 10px 20px; background: #FF6B81; color: white; border: none;
+        border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;
+        box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+    }
+    .btn-pink:hover { background: #FF4757; transform: translateY(-2px); }
+    .btn-outline {
+        padding: 8px 15px; background: white; color: #FF6B81; border: 2px solid #FFE0E6;
+        border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+    }
+    .btn-outline:hover { background: #FFF0F3; }
+    .dashboard-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px;
+    }
+    .data-box {
+        background: linear-gradient(135deg, #FFF0F3, #FFFFFF);
+        padding: 15px; border-radius: 12px; border: 1px solid #FFD1DC;
+        transition: transform 0.3s;
+    }
+    .data-box:hover { transform: translateY(-5px); }
+    .data-value { font-size: 1.8rem; font-weight: bold; color: #FF6B81; margin: 5px 0; }
+    .data-label { font-size: 0.9rem; color: #888; font-weight: bold; }
+    .back-link {
+        display: inline-block; margin-top: 20px; 
+        color: #999; text-decoration: none; font-size: 0.9rem;
+    }
+    .back-link:hover { color: #FF6B81; }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>飲食統計分析</h1>
-    <div id="statistics-result">
-      <!-- 這裡JS會顯示統計數據或圖表 -->
+    <div class="stats-card">
+        <h1 class="stats-title">📊 飲食與體重分析</h1>
+        
+        <div class="chart-container">
+            <canvas id="weightChartCanvas"></canvas>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="data-box">
+                <div class="data-label">已記錄天數</div>
+                <div class="data-value">30 <span style="font-size:1rem">天</span></div>
+            </div>
+            <div class="data-box">
+                <div class="data-label">平均攝取熱量</div>
+                <div class="data-value">1,850 <span style="font-size:1rem">kcal</span></div>
+            </div>
+            <div class="data-box">
+                <div class="data-label">體重變化</div>
+                <div class="data-value">▼ 3.2 <span style="font-size:1rem">kg</span></div>
+            </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #FFD1DC; margin: 30px 0;">
+
+        <h3 style="color:#555; text-align:left; margin-bottom:10px;">✏️ 新增體重紀錄</h3>
+        <div class="input-area">
+            <input id="weightValue" type="number" step="0.1" placeholder="體重 (kg)" class="pink-input" style="width: 120px;">
+            <input id="weightDate" type="date" class="pink-input">
+            <button id="saveWeight" class="btn-pink">儲存紀錄</button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
+            <div style="text-align:left;">
+                <h3 style="margin:0; color:#555; font-size:1.1rem;">📅 月回顧報告</h3>
+                <p style="color:#999; font-size:0.8rem; margin:5px 0;">產生詳細的飲食分析報告</p>
+            </div>
+            <button id="export-csv" class="btn-outline">📥 匯出 CSV 報表</button>
+        </div>
+        
+        <a href="home.html" class="back-link">← 返回主頁</a>
     </div>
-    <div id="weight-chart">
-      <h2>體重變化圖表</h2>
-      <canvas id="weightChartCanvas"></canvas>
-    </div>
-    <div id="weight-entry" style="margin-top:12px;">
-      <h3>新增體重紀錄</h3>
-      <input id="weightValue" type="number" step="0.1" placeholder="體重 (kg)" />
-      <input id="weightDate" type="date" />
-      <button id="saveWeight">儲存體重</button>
-    </div>
-    <div id="report-summary"></div>
-    <button id="export-csv">Export CSV</button>
-    <div id="monthly-review">
-      <h2>月回顧報告</h2>
-      <p id="monthlyReviewContent">這裡將顯示月回顧報告內容。</p>
-    </div>
-    <a href="home.html">← 回主頁</a>
   </div>
+
   <script src="script.js"></script>
-  <!-- 如果你沒有引入 Chart.js，可以用 CDN： -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    async function loadMonthlyReport() {
-      const token = sessionStorage.getItem('authToken');
-      if (!token) {
-        document.getElementById('monthlyReviewContent').textContent = '請先登入以檢視報表。';
-        return;
-      }
-      const resp = await fetch('http://localhost:3000/api/reports/monthly', { headers: { 'Authorization': 'Bearer ' + token } });
-      const data = await resp.json();
-      if (!resp.ok) { document.getElementById('monthlyReviewContent').textContent = JSON.stringify(data); return; }
-      const d = data.data;
-      document.getElementById('monthlyReviewContent').innerHTML = `本月共 ${d.totalRecords} 筆紀錄，總熱量 ${d.totalCalories} kcal。常見食物：${(d.mostCommon||[]).map(x=>x.name+'('+x.count+')').join(', ')}`;
-
-      // daily chart
-      const labels = Object.keys(d.daily).sort();
-      const values = labels.map(k => d.daily[k]);
-      const ctx = document.getElementById('weightChartCanvas').getContext('2d');
-      if (window.Chart) {
-        new Chart(ctx, {
-          type: 'line',
-          data: { labels, datasets: [{ label: '每日總熱量 (kcal)', data: values, borderColor: 'rgb(75, 192, 192)', tension: 0.2 }] },
-          options: { responsive: true }
-        });
-      } else {
-        ctx.fillText('Chart.js 未載入，無法繪製圖表。',10,10);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-  loadMonthlyReport();
-  loadWeightSeries();
-        document.getElementById('export-csv').addEventListener('click', async () => {
-          const token = sessionStorage.getItem('authToken');
-          if (!token) { alert('請先登入以匯出報表。'); return; }
-          const url = 'http://localhost:3000/api/reports/monthly?format=csv';
-          const resp = await fetch(url, { headers: { 'Authorization': 'Bearer ' + token } });
-          if (!resp.ok) { alert('匯出失敗'); return; }
-          const blob = await resp.blob();
-          const a = document.createElement('a');
-          const urlObj = URL.createObjectURL(blob);
-          a.href = urlObj;
-          a.download = `monthly-report.csv`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(urlObj);
-        });
-      document.getElementById('saveWeight').addEventListener('click', async () => {
-        const token = sessionStorage.getItem('authToken');
-        if (!token) { alert('請先登入'); return; }
-        const value = parseFloat(document.getElementById('weightValue').value);
-        const date = document.getElementById('weightDate').value || new Date().toISOString().split('T')[0];
-        if (!value) { alert('請輸入數值'); return; }
-        const resp = await fetch('http://localhost:3000/api/metrics', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }, body: JSON.stringify({ type: 'weight', value, date }) });
-        if (!resp.ok) { alert('儲存失敗'); return; }
-        alert('體重已儲存');
-        loadWeightSeries();
-      });
-    });
-
-    async function loadWeightSeries() {
-      const token = sessionStorage.getItem('authToken');
-      if (!token) return;
-      const resp = await fetch('http://localhost:3000/api/metrics?type=weight', { headers: { 'Authorization': 'Bearer ' + token } });
-      if (!resp.ok) return;
-      const data = await resp.json();
-      const rows = data.data || [];
-      const labels = rows.map(r => r.date.split('T')[0]);
-      const values = rows.map(r => Number(r.value));
-      const ctx = document.getElementById('weightChartCanvas').getContext('2d');
-      if (window.Chart) {
-        new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: '體重 (kg)', data: values, borderColor: 'rgb(255,99,132)', tension: 0.2 }] }, options: { responsive: true } });
-      }
-    }
-  </script>
+  <script src="statistics.js"></script>
 </body>
 </html>

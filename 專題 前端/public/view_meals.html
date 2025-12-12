@@ -1,5 +1,3 @@
-
-<!-- 查看紀錄頁面 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -7,21 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>智慧飲食管家｜查看紀錄</title>
   <link rel="stylesheet" href="style.css">
+  
+  <style>
+    body { background-color: #FFF0F5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 20px;
+        border: 3px solid #FFB6C1;
+        box-shadow: 0 10px 25px rgba(255, 182, 193, 0.2);
+        padding: 30px;
+        min-height: 80vh;
+    }
+
+    h1 { 
+        color: #FF6B81; 
+        text-align: center; 
+        margin-bottom: 25px; 
+        font-weight: bold;
+        border-bottom: 2px dashed #FFD1DC;
+        padding-bottom: 15px;
+    }
+
+    /* 列表區域 */
+    #meal-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* 單筆紀錄卡片 */
+    .meal-card {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #FFE0E6;
+        border-radius: 12px;
+        padding: 15px;
+        transition: 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .meal-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+        border-color: #FFB6C1;
+    }
+
+    /* 左側日期方塊 */
+    .date-box {
+        background-color: #FFF0F3;
+        color: #FF6B81;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        min-width: 60px;
+        margin-right: 15px;
+        border: 1px solid #FFD1DC;
+    }
+    .date-day { font-size: 1.2rem; font-weight: bold; line-height: 1; }
+    .date-month { font-size: 0.8rem; }
+
+    /* 中間內容 */
+    .meal-info { flex: 1; }
+    .meal-name { font-size: 1.1rem; font-weight: bold; color: #333; margin-bottom: 5px; }
+    .meal-cal { font-size: 0.9rem; color: #888; display: flex; align-items: center; gap: 5px; }
+
+    /* 餐別標籤 */
+    .meal-tag {
+        font-size: 0.8rem; color: white; padding: 3px 8px;
+        border-radius: 20px; font-weight: bold; display: inline-block;
+        margin-right: 8px;
+    }
+    .bg-breakfast { background-color: #FF9F43; } /* 橘 */
+    .bg-lunch { background-color: #54a0ff; }     /* 藍 */
+    .bg-dinner { background-color: #FF6B81; }    /* 粉 */
+    .bg-snack { background-color: #2ecc71; }     /* 綠 */
+
+    /* 刪除按鈕 */
+    .btn-delete {
+        background: none; border: none; font-size: 1.2rem; cursor: pointer;
+        color: #ddd; transition: 0.2s; padding: 5px;
+    }
+    .btn-delete:hover { color: #e74c3c; transform: scale(1.1); }
+
+    .btn-back {
+        display: block; margin: 30px auto 0; width: fit-content;
+        color: #999; text-decoration: none; font-size: 0.9rem;
+        padding: 8px 20px; border-radius: 20px; border: 1px solid transparent;
+        transition: 0.3s;
+    }
+    .btn-back:hover { border-color: #FF6B81; color: #FF6B81; background: #FFF0F3; }
+
+    /* 無資料時 */
+    .empty-state { text-align: center; color: #aaa; margin-top: 50px; }
+  </style>
 </head>
 <body data-theme="light">
   <div class="container">
-    <h1>我的飲食紀錄</h1>
+    <h1>📖 我的飲食紀錄</h1>
+    
     <div id="meal-list">
-      <!-- 這裡JS會動態載入紀錄 -->
+        <div class="empty-state">載入中...</div>
     </div>
-    <a href="home.html">← 回主頁</a>
+
+    <a href="home.html" class="btn-back">← 返回主頁</a>
   </div>
-</body>
-<script src="script.js"></script>
+
+  <script src="script.js"></script>
+  <script src="view_meals.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.body.setAttribute("data-theme", savedTheme);
   });
 </script>
-</html>
+</body>

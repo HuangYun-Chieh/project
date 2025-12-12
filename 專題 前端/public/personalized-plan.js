@@ -1,90 +1,193 @@
+function renderDietPlanUI() {
+    const token = sessionStorage.getItem('authToken') || localStorage.getItem('diet_token');
+    
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .diet-card {
+            background: #fff;
+            border-radius: 15px;
+            border: 3px solid #FFB6C1; 
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            padding: 30px;
+            max-width: 600px;
+            margin: 20px auto;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+        }
+        .diet-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .diet-subtitle { color: #888; margin-bottom: 25px; font-size: 0.9rem; }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const token = sessionStorage.getItem('authToken');
-  const goalSelect = document.getElementById('goal-select');
-  const generateBtn = document.getElementById('generate-plan');
-  const saveBtn = document.getElementById('save-goals');
-  const planResult = document.getElementById('plan-result');
-  const dailyCaloriesInput = document.getElementById('dailyCalories');
-  const targetWeightInput = document.getElementById('targetWeight');
-  const mealDistributionInput = document.getElementById('mealDistribution');
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-label { display: block; color: #555; font-weight: bold; margin-bottom: 5px; }
+        
+        .input-control {
+            width: 100%; padding: 12px;
+            border: 2px solid #FFE0E6; 
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #FFFDFD;
+            transition: 0.3s;
+        }
+        .input-control:focus { border-color: #FF6B81; outline: none; background: #fff; }
 
-  async function loadGoals() {
-    if (!token) return;
-    try {
-      const resp = await fetch('http://localhost:3000/api/goals', { headers: { 'Authorization': 'Bearer ' + token } });
-      const data = await resp.json();
-      if (resp.ok && data.data) {
-        const g = data.data;
-        if (g.goalType) goalSelect.value = g.goalType;
-        if (g.dailyCalories) dailyCaloriesInput.value = g.dailyCalories;
-        if (g.targetWeight) targetWeightInput.value = g.targetWeight;
-        if (g.mealDistribution) mealDistributionInput.value = g.mealDistribution;
-      }
-    } catch (err) {
-      console.warn('load goals failed', err);
+        .range-slider { -webkit-appearance: none; width: 100%; height: 8px; background: #FFE0E6; border-radius: 5px; outline: none; }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+            background: #FF6B81; cursor: pointer; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 30px; }
+        
+        .btn-primary {
+            flex: 1; padding: 12px; border: none; border-radius: 8px;
+            background: #FF6B81; color: white; font-weight: bold; cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover { background: #FF4757; }
+        
+        .btn-secondary {
+            flex: 1; padding: 12px; border: 2px solid #FFE0E6; border-radius: 8px;
+            background: white; color: #FF6B81; font-weight: bold; cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-secondary:hover { background: #FFF0F3; }
+
+        #result-area {
+            margin-top: 25px; padding: 20px; border-radius: 12px;
+            border: 2px dashed #FFB6C1;
+            background: #FFF5F7;
+            display: none;
+        }
+    `;
+    document.head.appendChild(style);
+
+    let container = document.getElementById('main-content') || document.body; 
+    container.innerHTML = `
+        <div class="diet-card">
+            <div class="diet-title">個性化飲食計畫</div>
+            <div class="diet-subtitle">設定您的目標，剩下的交給我們。</div>
+
+            <div class="input-group">
+                <label class="input-label">🎯 您的目標</label>
+                <select id="goal-select" class="input-control">
+                    <option value="減脂">🔥 減脂 (Burn Fat)</option>
+                    <option value="維持" selected>⚖️ 維持體態 (Maintain)</option>
+                    <option value="增肌">💪 增肌 (Build Muscle)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <div style="display:flex; justify-content:space-between;">
+                    <label class="input-label">⚖️ 目標體重 (kg)</label>
+                    <span id="weight-val" style="color:#FF6B81; font-weight:bold;">50</span>
+                </div>
+                <input type="range" id="weight-slider" class="range-slider" min="30" max="150" value="50">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">⚡ 每日目標熱量 (kcal)</label>
+                <input type="number" id="calorie-input" class="input-control" value="1400">
+            </div>
+
+            <div class="btn-group">
+                <button id="save-btn" class="btn-secondary">儲存設定</button>
+                <button id="gen-btn" class="btn-primary">生成建議</button>
+            </div>
+
+            <div id="result-area">
+                <h3 style="color:#333; margin:0 0 10px 0;" id="result-title">建議 (維持)</h3>
+                <p id="result-text" style="color:#555; line-height:1.5;"></p>
+                <div style="margin-top:10px; font-weight:bold; color:#FF6B81;">
+                    建議每日攝取：<span id="res-cal">1400</span> kcal
+                </div>
+                <div style="margin-top:5px; font-size:0.9rem; color:#666;">
+                    目標體重：<span id="res-weight">50</span> kg
+                </div>
+                <div style="margin-top:20px;">
+                    <a href="#" onclick="history.back()" style="color:#999; text-decoration:none; font-size:0.9rem;">← 返回上一頁</a>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 變數綁定
+    const goalSelect = document.getElementById('goal-select');
+    const wSlider = document.getElementById('weight-slider');
+    const wVal = document.getElementById('weight-val');
+    const calorieInput = document.getElementById('calorie-input');
+    const resultArea = document.getElementById('result-area');
+
+    // 體重滑桿連動
+    wSlider.addEventListener('input', (e) => { wVal.innerText = e.target.value; });
+
+    function getPayload() {
+        return {
+            goalType: goalSelect.value,
+            dailyCalories: parseInt(calorieInput.value || 0, 10),
+            targetWeight: parseFloat(wSlider.value || 0),
+            mealDistribution: "30,40,30" 
+        };
     }
-  }
 
-  async function saveGoals(payload) {
-    if (!token) return;
-    try {
-      payload.updated_at = new Date().toISOString();
-      const resp = await fetch('http://localhost:3000/api/goals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify(payload)
-      });
-      const data = await resp.json();
-      if (resp.ok) {
-        return data.data;
-      } else {
-        console.warn('save goals failed', data);
-      }
-    } catch (err) { console.warn(err); }
-    return null;
-  }
-
-  function renderSuggestion(goalType, payload) {
-    let html = '';
-    if (!payload) payload = {};
-    if (goalType === '減脂') {
-      html = `<h3>建議（減脂）</h3><p>建議每日熱量：以 TDEE - 500 kcal 為目標，均衡攝取蛋白質與蔬菜。</p>`;
-    } else if (goalType === '增肌') {
-      html = `<h3>建議（增肌）</h3><p>建議增加總熱量，強調訓練後蛋白質攝取與充足碳水化合物。</p>`;
-    } else {
-      html = `<h3>建議（維持）</h3><p>維持目前熱量，注意營養均衡與定期追蹤。</p>`;
+    async function loadGoals() {
+        if (!token) return;
+        try {
+            const resp = await fetch('http://localhost:3000/api/goals', { headers: { 'Authorization': 'Bearer ' + token } });
+            const json = await resp.json();
+            if (resp.ok && json.data) {
+                const g = json.data;
+                if (g.goalType) goalSelect.value = g.goalType;
+                if (g.dailyCalories) calorieInput.value = g.dailyCalories;
+                if (g.targetWeight) { wSlider.value = g.targetWeight; wVal.innerText = g.targetWeight; }
+            }
+        } catch (err) { console.warn('載入失敗 (Demo模式)', err); }
     }
-    if (payload.dailyCalories) html += `<p>您設定的每日熱量：${payload.dailyCalories} kcal</p>`;
-    if (payload.targetWeight) html += `<p>目標體重：${payload.targetWeight} kg</p>`;
-    if (payload.mealDistribution) html += `<p>餐別分配：${payload.mealDistribution}</p>`;
-    planResult.innerHTML = html;
-  }
 
-  generateBtn.addEventListener('click', async () => {
-    const goalType = goalSelect.value;
-    const payload = {
-      goalType,
-      dailyCalories: parseInt(dailyCaloriesInput.value || 0, 10) || null,
-      targetWeight: parseFloat(targetWeightInput.value || 0) || null,
-      mealDistribution: mealDistributionInput.value || null
-    };
-    await saveGoals(payload);
-    renderSuggestion(goalType, payload);
-    alert('個人化目標已儲存並生成建議');
-  });
+    async function saveGoals(payload) {
+        if (!token) return true;
+        try {
+            payload.updated_at = new Date().toISOString();
+            const resp = await fetch('http://localhost:3000/api/goals', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                body: JSON.stringify(payload)
+            });
+            return resp.ok;
+        } catch (err) { return true; }
+    }
 
-  saveBtn.addEventListener('click', async () => {
-    const payload = {
-      goalType: goalSelect.value,
-      dailyCalories: parseInt(dailyCaloriesInput.value || 0, 10) || null,
-      targetWeight: parseFloat(targetWeightInput.value || 0) || null,
-      mealDistribution: mealDistributionInput.value || null
-    };
-    await saveGoals(payload);
-    alert('目標設定已儲存');
-  });
+    function renderSuggestionVisual(payload) {
+        const goal = payload.goalType;
+        let text = "";
+        if(goal === '減脂') text = "建議採取「熱量赤字」策略，多攝取高纖蔬菜與低脂蛋白，避免精緻澱粉。";
+        else if(goal === '增肌') text = "建議進行「熱量盈餘」，增加碳水化合物與蛋白質攝取，搭配重量訓練。";
+        else text = "維持目前熱量，注意營養均衡與定期追蹤。";
 
-  // 初始化
-  loadGoals();
-});
+        document.getElementById('result-text').innerText = text;
+        document.getElementById('res-cal').innerText = payload.dailyCalories;
+        document.getElementById('res-weight').innerText = payload.targetWeight;
+        document.getElementById('result-title').innerText = `建議 (${goal})`;
+        
+        resultArea.style.display = 'block';
+    }
+
+    document.getElementById('save-btn').addEventListener('click', async () => {
+        await saveGoals(getPayload());
+        alert('設定已儲存！');
+    });
+
+    document.getElementById('gen-btn').addEventListener('click', async () => {
+        const payload = getPayload();
+        await saveGoals(payload);
+        renderSuggestionVisual(payload);
+    });
+
+    loadGoals();
+}
+
+document.addEventListener('DOMContentLoaded', renderDietPlanUI);
