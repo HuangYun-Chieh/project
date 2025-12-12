@@ -8,8 +8,6 @@ const fs = require('fs');
 const app = express();
 
 // --- 1. 設定前端靜態檔案路徑 ---
-// 注意：請確認你的資料夾名稱到底是「專題 前端」(有空格) 還是「專題_前端」(底線)
-// 這裡預設用「有空格」的版本，因為你剛剛說路徑有空格
 const frontendPath = path.join(__dirname, '../../專題 前端'); 
 console.log('前端網頁路徑設為:', frontendPath); 
 
@@ -98,7 +96,7 @@ passport.use(new GoogleStrategy({
 
 // --- 5. 路由設定 ---
 
-// ★★★ 作弊通道 (備用：萬一回家資料庫還是連不上，用這個可以先操作) ★★★
+// ★★★ 作弊通道 ★★★
 app.get('/auth/fake', (req, res) => {
     const fakeUser = { id: 1, username: 'test_user', nickname: '測試人員' };
     const token = jwt.sign(fakeUser, JWT_SECRET, { expiresIn: '1h' });
