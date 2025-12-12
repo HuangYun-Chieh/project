@@ -8,8 +8,8 @@ const fs = require('fs');
 const app = express();
 
 // --- 1. 設定前端靜態檔案路徑 ---
-const frontendPath = path.join(__dirname, '../../專題 前端'); 
-console.log('前端網頁路徑設為:', frontendPath); 
+const frontendPath = path.join(__dirname, '../../專題 前端/public');
+console.log('前端路徑設為:', frontendPath);
 
 if (fs.existsSync(frontendPath)) {
     console.log('✅ 成功讀取前端資料夾！');
